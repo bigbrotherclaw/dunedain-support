@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dúnedain — Support</title>
+  <title>Dúnedain — Support & User Guide</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -11,9 +11,48 @@
       background: #0a0a0a; color: #e0e0e0;
       line-height: 1.7; padding: 2rem 1rem;
     }
-    .container { max-width: 560px; margin: 0 auto; }
+    .container { max-width: 680px; margin: 0 auto; }
     h1 { font-size: 1.8rem; margin-bottom: 0.25rem; color: #fff; }
-    .subtitle { color: #888; margin-bottom: 2rem; font-size: 0.95rem; }
+    .tagline { color: #888; margin-bottom: 2.5rem; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.2rem; color: #fff; margin: 2.5rem 0 0.8rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid #222;
+    }
+    h3 { font-size: 1.05rem; color: #ccc; margin: 1.5rem 0 0.5rem; }
+    p { font-size: 0.95rem; color: #bbb; margin-bottom: 0.8rem; }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0 1rem; }
+    li { font-size: 0.95rem; color: #bbb; margin-bottom: 0.4rem; }
+    li strong { color: #e0e0e0; }
+    .badge {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      padding: 0.15rem 0.5rem; border-radius: 6px; margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+    .badge-str { background: #F59E0B20; color: #F59E0B; }
+    .badge-hic { background: #8B5CF620; color: #8B5CF6; }
+    .badge-end { background: #10B98120; color: #10B981; }
+    .badge-rest { background: #6B728020; color: #9CA3AF; }
+    .tip {
+      background: #10B98110; border-left: 3px solid #10B981;
+      padding: 0.8rem 1rem; border-radius: 0 8px 8px 0;
+      margin: 1rem 0; font-size: 0.9rem; color: #aaa;
+    }
+    .tip strong { color: #34D399; }
+    .warn {
+      background: #F59E0B10; border-left: 3px solid #F59E0B;
+      padding: 0.8rem 1rem; border-radius: 0 8px 8px 0;
+      margin: 1rem 0; font-size: 0.9rem; color: #aaa;
+    }
+    .warn strong { color: #FBBF24; }
+    table {
+      width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem;
+      font-size: 0.9rem;
+    }
+    th { text-align: left; color: #888; font-weight: 600; padding: 0.5rem 0.75rem; border-bottom: 1px solid #333; }
+    td { padding: 0.5rem 0.75rem; color: #bbb; border-bottom: 1px solid #1a1a1a; }
+    hr { border: none; border-top: 1px solid #222; margin: 3rem 0; }
+
+    /* Form styles */
     label { display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 0.3rem; margin-top: 1.2rem; }
     input, select, textarea {
       width: 100%; padding: 0.7rem 0.85rem; border-radius: 10px;
@@ -40,14 +79,225 @@
     .msg.success { background: #10B98120; color: #34D399; border: 1px solid #10B98140; }
     .msg.error { background: #EF444420; color: #F87171; border: 1px solid #EF444440; }
     .msg.visible { display: block; }
-    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
     .optional { color: #666; font-size: 0.8rem; }
+    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
+    a { color: #10B981; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .toc { background: #111; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+    .toc ul { list-style: none; padding: 0; margin: 0; }
+    .toc li { margin-bottom: 0.3rem; }
+    .toc a { color: #888; font-size: 0.9rem; }
+    .toc a:hover { color: #10B981; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Dúnedain — Support</h1>
-    <p class="subtitle">Have an issue or suggestion? Let us know.</p>
+    <h1>Dúnedain</h1>
+    <p class="tagline">Strength & conditioning built on Tactical Barbell methodology.</p>
+
+    <div class="toc">
+      <ul>
+        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#strength">Strength Training</a></li>
+        <li><a href="#conditioning">Conditioning</a></li>
+        <li><a href="#weekly-schedule">Weekly Schedule</a></li>
+        <li><a href="#logging">Logging Workouts</a></li>
+        <li><a href="#garmin">Garmin Integration</a></li>
+        <li><a href="#whoop">Whoop Integration</a></li>
+        <li><a href="#calendar">Calendar & Swapping Days</a></li>
+        <li><a href="#stats">Stats & Progress</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#contact">Contact & Support</a></li>
+      </ul>
+    </div>
+
+    <!-- GETTING STARTED -->
+    <h2 id="getting-started">Getting Started</h2>
+    <ol>
+      <li><strong>Sign in</strong> with your Google account. Your profile and settings are created automatically.</li>
+      <li><strong>Set your 1 rep maxes (1RMs)</strong> in Settings. The app calculates all your working weights from these numbers.</li>
+      <li><strong>Set your start date</strong> — this tells the app where you are in the 6-week loading cycle.</li>
+      <li><strong>Connect devices</strong> (optional) — link your Garmin and/or Whoop accounts for automatic activity tracking.</li>
+    </ol>
+    <div class="tip">
+      <strong>Tip:</strong> If you're new to Tactical Barbell, check out Settings → About This Program for background on the methodology.
+    </div>
+
+    <!-- DASHBOARD -->
+    <h2 id="dashboard">Dashboard</h2>
+    <p>The home screen shows:</p>
+    <ul>
+      <li><strong>Your Week</strong> — a strip showing all 7 days, what's planned, and what you've completed.</li>
+      <li><strong>Today's Workout</strong> — the programmed session for today with full details (exercises, sets, weights).</li>
+      <li><strong>Recovery & Strain</strong> — if you have Whoop connected, you'll see donut gauges for Sleep, Recovery, and Strain.</li>
+      <li><strong>Upcoming</strong> — a collapsible list of the next few days' workouts.</li>
+    </ul>
+
+    <!-- STRENGTH -->
+    <h2 id="strength">Strength Training</h2>
+    <p>Dúnedain follows the <strong>Tactical Barbell Operator</strong> template — 3 strength sessions per week with 4 main lifts:</p>
+    <table>
+      <tr><th>Lift</th><th>Sessions</th></tr>
+      <tr><td>Back Squat</td><td>All 3 days</td></tr>
+      <tr><td>DB Bench Press</td><td>All 3 days</td></tr>
+      <tr><td>Weighted Pull-up</td><td>All 3 days</td></tr>
+      <tr><td>Deadlift</td><td>1 work set per session</td></tr>
+    </table>
+
+    <h3>6-Week Loading Cycle</h3>
+    <p>Weights progress automatically based on your 1RMs:</p>
+    <table>
+      <tr><th>Week</th><th>Sets × Reps</th><th>Intensity</th></tr>
+      <tr><td>Week 1</td><td>3 × 5</td><td>70%</td></tr>
+      <tr><td>Week 2</td><td>3 × 5</td><td>80%</td></tr>
+      <tr><td>Week 3</td><td>3 × 3</td><td>90%</td></tr>
+      <tr><td>Week 4</td><td>3 × 5</td><td>75%</td></tr>
+      <tr><td>Week 5</td><td>3 × 3</td><td>85%</td></tr>
+      <tr><td>Week 6</td><td>3 × 2</td><td>95%</td></tr>
+    </table>
+    <p>After Week 6, the cycle repeats. Re-test or adjust your 1RMs in Settings if you've gotten stronger.</p>
+
+    <h3>Deadlift</h3>
+    <p>Deadlift follows <strong>TB Option 1</strong> — 1 work set per session at the same percentage as your other lifts. This keeps total deadlift volume manageable alongside squats.</p>
+
+    <h3>Accessories</h3>
+    <p>Each strength day includes an accessory group that rotates:</p>
+    <ul>
+      <li><strong>Group A</strong> — Chest + Abs</li>
+      <li><strong>Group B</strong> — Back + Arms + Abs</li>
+      <li><strong>Group C</strong> — Shoulders + Chest + Abs</li>
+    </ul>
+
+    <!-- CONDITIONING -->
+    <h2 id="conditioning">Conditioning</h2>
+    <p>Conditioning follows the <strong>Black Protocol</strong> from Tactical Barbell II:</p>
+    <ul>
+      <li><strong>2 HIC sessions/week</strong> <span class="badge badge-hic">HIC</span> — High Intensity Conditioning (20–30 min, high effort)</li>
+      <li><strong>1 Endurance session/week</strong> <span class="badge badge-end">E</span> — Long Steady State or similar (30–60+ min, conversational pace)</li>
+    </ul>
+
+    <h3>HIC Workouts</h3>
+    <p>The app includes all <strong>40 HIC protocols</strong> from TB2, organized into categories:</p>
+    <ul>
+      <li><strong>#1–24</strong> — Aerobic/Anaerobic (intervals, tempo work, threshold training)</li>
+      <li><strong>#25–36</strong> — General Conditioning (circuits, complexes, carries)</li>
+      <li><strong>#37–40</strong> — Power Development (explosive work, plyometrics)</li>
+    </ul>
+    <p>The app rotates through these automatically, or you can pick your own.</p>
+
+    <h3>Endurance Sessions</h3>
+    <p>7 endurance session types rotate weekly:</p>
+    <ul>
+      <li><strong>LSS</strong> — Long Steady State (run, bike, swim, ruck — keep heart rate in Zone 2)</li>
+      <li><strong>Ruck Up</strong> — Weighted rucking</li>
+      <li><strong>Triples</strong> — 3 activities back-to-back (e.g., run, bike, swim)</li>
+      <li><strong>Fun Run</strong> variants — Fartlek-style or easy trail running</li>
+      <li><strong>Warrior Run</strong> — Obstacle/terrain-focused run</li>
+    </ul>
+
+    <h3>Easy Weeks</h3>
+    <p>Every 3rd week is an <strong>Easy Week</strong> — conditioning is dialed back to let your body recover. The app handles this automatically.</p>
+
+    <!-- WEEKLY SCHEDULE -->
+    <h2 id="weekly-schedule">Weekly Schedule</h2>
+    <p>The default weekly template:</p>
+    <table>
+      <tr><th>Day</th><th>Session</th></tr>
+      <tr><td>Day 1</td><td>Rest <span class="badge badge-rest">REST</span></td></tr>
+      <tr><td>Day 2</td><td>Strength A <span class="badge badge-str">STR</span></td></tr>
+      <tr><td>Day 3</td><td>HIC <span class="badge badge-hic">HIC</span></td></tr>
+      <tr><td>Day 4</td><td>Strength B <span class="badge badge-str">STR</span></td></tr>
+      <tr><td>Day 5</td><td>HIC <span class="badge badge-hic">HIC</span></td></tr>
+      <tr><td>Day 6</td><td>Strength C <span class="badge badge-str">STR</span></td></tr>
+      <tr><td>Day 7</td><td>Endurance <span class="badge badge-end">E</span></td></tr>
+    </table>
+    <p>You can swap days around using the calendar (see below).</p>
+
+    <!-- LOGGING -->
+    <h2 id="logging">Logging Workouts</h2>
+    <p>There are three ways to log a workout:</p>
+    <ol>
+      <li><strong>Auto-detection</strong> — If you have Garmin or Whoop connected, the app detects completed activities and prompts you to log them with one tap. It pulls in duration, heart rate, distance, pace, and strain automatically.</li>
+      <li><strong>Manual log</strong> — Tap today's workout card, complete the exercises, and log it with your actual weights and reps.</li>
+      <li><strong>Quick log</strong> — Mark a workout as done without detailed tracking.</li>
+    </ol>
+    <div class="tip">
+      <strong>Tip:</strong> For multi-activity sessions (like a run + swim for LSS), the app will detect and include all activities, not just the first one.
+    </div>
+
+    <!-- GARMIN -->
+    <h2 id="garmin">Garmin Integration</h2>
+    <p>Connect your Garmin account in Settings to automatically pull:</p>
+    <ul>
+      <li>Activity type, duration, and distance</li>
+      <li>Heart rate (average and max)</li>
+      <li>Pace and splits</li>
+      <li>Cadence, stride length, elevation gain</li>
+      <li>Swimming metrics (stroke count, SWOLF, pool length)</li>
+      <li>VO2 Max and training effect</li>
+    </ul>
+    <p>Garmin data syncs when you open the app and periodically while it's open.</p>
+    <div class="warn">
+      <strong>Note:</strong> Garmin uses a two-step OAuth process. If your connection drops, reconnect in Settings → Garmin.
+    </div>
+
+    <!-- WHOOP -->
+    <h2 id="whoop">Whoop Integration</h2>
+    <p>Connect your Whoop account in Settings to pull:</p>
+    <ul>
+      <li><strong>Recovery</strong> — recovery score, HRV (RMSSD), resting heart rate</li>
+      <li><strong>Sleep</strong> — sleep performance percentage, duration, stages</li>
+      <li><strong>Strain</strong> — daily strain score, calories burned</li>
+      <li><strong>Workouts</strong> — activity strain, heart rate, and heart rate zones</li>
+    </ul>
+    <p>Whoop data appears on the dashboard as three donut gauges (Sleep, Recovery, Strain) and is merged with Garmin data for workout logging.</p>
+
+    <h3>How Merging Works</h3>
+    <p>When both devices are connected, the app uses <strong>Garmin for mechanics</strong> (pace, distance, splits) and <strong>Whoop for strain</strong> (strain score, calories, HR zones). Activities are matched by time overlap.</p>
+
+    <h3>Sync Schedule</h3>
+    <ul>
+      <li><strong>On app launch</strong> — syncs the last 7 days</li>
+      <li><strong>Every 15 minutes</strong> — syncs the last 3 days while the app is open</li>
+      <li><strong>First connection</strong> — backfills 30 days of data</li>
+      <li><strong>Webhooks</strong> — Whoop pushes real-time updates for recovery, sleep, and workouts</li>
+    </ul>
+
+    <!-- CALENDAR -->
+    <h2 id="calendar">Calendar & Swapping Days</h2>
+    <p>The calendar view shows your full training schedule with completed workouts marked. If you need to rearrange your week:</p>
+    <ol>
+      <li>Open the Calendar tab</li>
+      <li><strong>Drag and drop</strong> any workout day to swap it with another</li>
+      <li>Swaps are saved per-week, so your base template stays intact</li>
+    </ol>
+    <p>This is useful when life gets in the way — move your strength day to accommodate travel, recovery, or scheduling conflicts.</p>
+
+    <!-- STATS -->
+    <h2 id="stats">Stats & Progress</h2>
+    <p>The Stats tab shows your training history and trends:</p>
+    <ul>
+      <li>Workout frequency and consistency</li>
+      <li>Volume and loading over time</li>
+      <li>Endurance metrics — pace trends, distance, PRs</li>
+      <li>Whoop recovery and strain trends</li>
+    </ul>
+
+    <!-- SETTINGS -->
+    <h2 id="settings">Settings</h2>
+    <ul>
+      <li><strong>1 Rep Maxes</strong> — Update your Back Squat, Bench Press, Weighted Pull-up, and Deadlift 1RMs. All working weights recalculate automatically.</li>
+      <li><strong>Start Date</strong> — Set or adjust when your current training block started.</li>
+      <li><strong>Garmin / Whoop</strong> — Connect or disconnect device integrations.</li>
+      <li><strong>About This Program</strong> — Background on Tactical Barbell, the methodology, and the science behind it.</li>
+    </ul>
+
+    <hr>
+
+    <!-- CONTACT FORM -->
+    <h2 id="contact">Contact & Support</h2>
+    <p>Found a bug, have a feature request, or need help? Submit the form below and we'll look into it.</p>
 
     <div id="msg" class="msg"></div>
 
