@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dúnedain — Support</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a; color: #e0e0e0;
+      line-height: 1.7; padding: 2rem 1rem;
+    }
+    .container { max-width: 560px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; color: #fff; }
+    .subtitle { color: #888; margin-bottom: 2rem; font-size: 0.95rem; }
+    label { display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 0.3rem; margin-top: 1.2rem; }
+    input, select, textarea {
+      width: 100%; padding: 0.7rem 0.85rem; border-radius: 10px;
+      border: 1px solid #333; background: #141414; color: #e0e0e0;
+      font-size: 0.95rem; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #10B981; }
+    textarea { min-height: 140px; resize: vertical; }
+    select { appearance: none; cursor: pointer; }
+    .btn {
+      display: block; width: 100%; margin-top: 1.5rem; padding: 0.8rem;
+      background: #10B981; color: #fff; border: none; border-radius: 12px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #059669; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .msg {
+      margin-top: 1rem; padding: 0.8rem 1rem; border-radius: 10px;
+      font-size: 0.9rem; line-height: 1.5; display: none;
+    }
+    .msg.success { background: #10B98120; color: #34D399; border: 1px solid #10B98140; }
+    .msg.error { background: #EF444420; color: #F87171; border: 1px solid #EF444440; }
+    .msg.visible { display: block; }
+    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
+    .optional { color: #666; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dúnedain — Support</h1>
+    <p class="subtitle">Have an issue or suggestion? Let us know.</p>
+
+    <div id="msg" class="msg"></div>
+
+    <form id="supportForm">
+      <label>Name <span class="optional">(optional)</span></label>
+      <input type="text" name="name" placeholder="Your name" maxlength="100">
+
+      <label>Email <span class="optional">(optional — only if you want a response)</span></label>
+      <input type="email" name="email" placeholder="your@email.com" maxlength="200">
+
+      <label>Category</label>
+      <select name="category">
+        <option value="bug">Bug Report</option>
+        <option value="feature">Feature Request</option>
+        <option value="account">Account Issue</option>
+        <option value="integration">Whoop / Garmin Integration</option>
+        <option value="general" selected>General Question</option>
+      </select>
+
+      <label>Subject</label>
+      <input type="text" name="subject" placeholder="Brief summary" required maxlength="200">
+
+      <label>Message</label>
+      <textarea name="message" placeholder="Describe the issue or suggestion in detail..." required maxlength="5000"></textarea>
+
+      <button type="submit" class="btn" id="submitBtn">Submit</button>
+    </form>
+
+    <div class="footer">
+      <p>&copy; 2026 Dúnedain. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    const API = "https://ywuqqzaosauxwgajjpgg.supabase.co/functions/v1/support";
+    const form = document.getElementById("supportForm");
+    const msg = document.getElementById("msg");
+    const btn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.className = "msg";
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+
+        if (res.ok) {
+          msg.textContent = "Your message has been submitted. Thank you!";
+          msg.className = "msg success visible";
+          form.reset();
+        } else {
+          msg.textContent = json.error || "Something went wrong.";
+          msg.className = "msg error visible";
+        }
+      } catch {
+        msg.textContent = "Network error. Please try again.";
+        msg.className = "msg error visible";
+      }
+
+      btn.disabled = false;
+      btn.textContent = "Submit";
+    });
+  </script>
+</body>
+</html>
