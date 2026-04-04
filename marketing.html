@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dúnedain — Train Like a Ranger</title>
+  <meta name="description" content="Tactical Barbell strength & conditioning app with Whoop and Garmin integration. Built for those who hold the line.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D48B;
+      --green: #10B981;
+      --green-dark: #059669;
+      --bg: #050505;
+      --bg-card: #0d0d0d;
+      --border: rgba(255,255,255,0.06);
+      --text: #c8c8c8;
+      --text-dim: #777;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tree {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      color: #999;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.2rem;
+      background: linear-gradient(135deg, var(--gold), #B8943F);
+      color: #0a0a0a;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 14px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.25);
+    }
+
+    .hero-badge {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Quote Banner ── */
+    .quote-banner {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(180deg, rgba(201,168,76,0.04), transparent);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote-banner blockquote {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--gold);
+      font-style: italic;
+      max-width: 700px;
+      margin: 0 auto 0.5rem;
+    }
+
+    .quote-banner cite {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-style: normal;
+    }
+
+    /* ── Section ── */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: #999;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    /* ── Phone Showcase ── */
+    .phone-row {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+
+    .phone-frame {
+      width: 260px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 24px;
+      border: 2px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05);
+    }
+
+    .phone-caption {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Feature Grid ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(201,168,76,0.2);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ── Split Section ── */
+    .split {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      margin: 2rem 0;
+    }
+
+    .split-text { flex: 1; }
+    .split-image { flex: 0 0 280px; }
+
+    .split-image img {
+      width: 100%;
+      border-radius: 24px;
+      border: 2px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .split.reverse { flex-direction: row-reverse; }
+
+    @media (max-width: 768px) {
+      .split, .split.reverse {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .split-image { flex: 0 0 auto; width: 280px; margin: 0 auto; }
+      .phone-frame { width: 220px; }
+    }
+
+    /* ── Loading Cycle Table ── */
+    .cycle-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .cycle-table th {
+      text-align: left;
+      color: var(--gold);
+      font-weight: 600;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #222;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cycle-table td {
+      padding: 0.6rem 1rem;
+      color: #bbb;
+      border-bottom: 1px solid #111;
+    }
+
+    /* ── Integration Badges ── */
+    .integrations {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .int-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+    }
+
+    .int-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .int-dot.whoop { background: #44b700; }
+    .int-dot.garmin { background: #007dff; }
+
+    .int-badge span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ccc;
+    }
+
+    /* ── Lore Section ── */
+    .lore {
+      background: linear-gradient(180deg, transparent, rgba(201,168,76,0.03), transparent);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+
+    .lore-text {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #999;
+      font-weight: 300;
+    }
+
+    .lore-text em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ── CTA Section ── */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 1.5rem;
+    }
+
+    .cta-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: #888;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: #444;
+      font-size: 0.85rem;
+    }
+
+    .site-footer a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 0.8rem;
+    }
+
+    .site-footer a:hover { color: var(--gold); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate {
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.3s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+    .delay-4 { animation-delay: 0.6s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="hero-tree animate">🌳</div>
+    <h1 class="animate delay-1"><span>Dúnedain</span></h1>
+    <p class="hero-subtitle animate delay-2">Train Like a Ranger</p>
+    <p class="hero-tagline animate delay-3">
+      Tactical Barbell strength &amp; conditioning, powered by Whoop and Garmin intelligence.
+      Built for those who hold the line — whether or not anyone's watching.
+    </p>
+    <a href="#features" class="hero-cta animate delay-4">See What's Inside ↓</a>
+    <p class="hero-badge animate delay-4">Available on iOS via TestFlight</p>
+  </div>
+
+  <!-- ═══ QUOTE ═══ -->
+  <div class="quote-banner">
+    <blockquote>"All that is gold does not glitter, not all those who wander are lost."</blockquote>
+    <cite>— J.R.R. Tolkien, The Fellowship of the Ring</cite>
+  </div>
+
+  <!-- ═══ PHONE SHOWCASE ═══ -->
+  <section id="features">
+    <div class="section-label">The App</div>
+    <h2 class="section-title">Your entire training program, in your pocket.</h2>
+    <p class="section-desc">
+      Every workout calculated. Every rep programmed. Recovery data at a glance.
+      Just show up and do the work.
+    </p>
+
+    <div class="phone-row">
+      <div class="phone-frame">
+        <img src="images/dashboard.jpg" alt="Dúnedain Dashboard — weekly overview, recovery gauges, today's workout">
+        <div class="phone-caption">Dashboard</div>
+      </div>
+      <div class="phone-frame">
+        <img src="images/workout.jpg" alt="Dúnedain Workout — strength programming with recovery advisor">
+        <div class="phone-caption">Workout</div>
+      </div>
+      <div class="phone-frame">
+        <img src="images/stats.jpg" alt="Dúnedain Stats — activity tracking, strain by sport, calorie charts">
+        <div class="phone-caption">Stats</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STRENGTH SECTION ═══ -->
+  <section>
+    <div class="split">
+      <div class="split-text">
+        <div class="section-label">Forged in Iron</div>
+        <h2 class="section-title">Operator Strength Protocol</h2>
+        <p class="section-desc">
+          Three days a week. Four lifts. A 6-week loading cycle that builds real, functional strength — 
+          the kind the Rangers of the North relied on to patrol the wild lands of Eriador for decades.
+        </p>
+        <p style="color:#888; font-size:0.95rem; margin-bottom:1.2rem;">
+          Set your 1 rep maxes once and the app handles everything — sets, reps, percentages, and 
+          progressive overload across the full cycle. Deadlift follows TB Option 1 with one work set 
+          per session. Accessories rotate automatically.
+        </p>
+        <table class="cycle-table">
+          <tr><th>Week</th><th>Protocol</th><th>Intensity</th></tr>
+          <tr><td>1</td><td>3 × 5</td><td>70%</td></tr>
+          <tr><td>2</td><td>3 × 5</td><td>80%</td></tr>
+          <tr><td>3</td><td>3 × 3</td><td>90%</td></tr>
+          <tr><td>4</td><td>3 × 5</td><td>75%</td></tr>
+          <tr><td>5</td><td>3 × 3</td><td>85%</td></tr>
+          <tr><td>6</td><td>3 × 2</td><td>95%</td></tr>
+        </table>
+      </div>
+      <div class="split-image">
+        <img src="images/workout.jpg" alt="Strength workout view with calculated weights">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONDITIONING ═══ -->
+  <section>
+    <div class="split reverse">
+      <div class="split-text">
+        <div class="section-label">Black Protocol</div>
+        <h2 class="section-title">Conditioning That Actually Works</h2>
+        <p class="section-desc">
+          Two HIC sessions and one endurance day per week — the Black Protocol from Tactical Barbell II.
+          40 HIC workouts and 7 endurance session types keep things varied and brutal.
+        </p>
+        <p style="color:#888; font-size:0.95rem; margin-bottom:1.2rem;">
+          Every third week is an easy week. Because even Aragorn rested before the Battle of Pelennor Fields.
+          The app manages the rotation so you don't have to think about it — just lace up and go.
+        </p>
+        <p style="color:#888; font-size:0.95rem;">
+          Multi-activity endurance sessions (run + swim, bike + ruck) are detected and logged together 
+          automatically when your devices are connected.
+        </p>
+      </div>
+      <div class="split-image">
+        <img src="images/calendar.jpg" alt="Calendar view with full month training schedule">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DEVICE INTEGRATION ═══ -->
+  <section>
+    <div class="split">
+      <div class="split-text">
+        <div class="section-label">Intelligence</div>
+        <h2 class="section-title">Whoop + Garmin, Unified</h2>
+        <p class="section-desc">
+          The Dúnedain didn't wander blind. Neither should you.
+        </p>
+        <p style="color:#888; font-size:0.95rem; margin-bottom:1rem;">
+          Connect your Whoop for recovery scores, strain, sleep performance, and heart rate zones. 
+          Connect your Garmin for pace, distance, splits, cadence, VO2 Max, and training effect.
+        </p>
+        <p style="color:#888; font-size:0.95rem; margin-bottom:1.5rem;">
+          The app <em style="color:var(--gold);">merges both data streams</em> — Garmin for the mechanics, 
+          Whoop for the physiology. Activities auto-match by time overlap. One tap to log.
+        </p>
+        <p style="color:#888; font-size:0.95rem; margin-bottom:1.5rem;">
+          When your recovery is low, Dúnedain tells you. A built-in recovery advisor recommends 
+          swapping to lighter work when your body needs it — because the strongest thing you can do 
+          some days is stand down.
+        </p>
+        <div class="integrations">
+          <div class="int-badge">
+            <div class="int-dot whoop"></div>
+            <span>Whoop</span>
+          </div>
+          <div class="int-badge">
+            <div class="int-dot garmin"></div>
+            <span>Garmin</span>
+          </div>
+        </div>
+      </div>
+      <div class="split-image">
+        <img src="images/settings.jpg" alt="Settings showing Whoop and Garmin connected with live data">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES GRID ═══ -->
+  <section>
+    <div class="section-label">Everything You Need</div>
+    <h2 class="section-title">Built for the Long Patrol</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">⚔️</div>
+        <h3>Auto-Calculated Weights</h3>
+        <p>Enter your 1RMs once. Every set, rep, and percentage is programmed across the entire 6-week cycle. No spreadsheets.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Recovery Advisor</h3>
+        <p>Whoop recovery data powers real-time recommendations. Low recovery? The app suggests swapping to active recovery before you overtrain.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Activity Intelligence</h3>
+        <p>Strain by sport, calorie trends, pace progressions, and workout history — all pulled automatically from your devices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Drag & Drop Calendar</h3>
+        <p>Life doesn't follow a schedule. Long-press and drag to swap training days without breaking your program structure.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Smart Auto-Detection</h3>
+        <p>Finished a run? The app knows. It detects activities from Garmin and Whoop, merges the data, and lets you log with one tap.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌑</div>
+        <h3>Dark by Nature</h3>
+        <p>Pure black UI designed for OLED screens and 5 AM gym sessions. No blinding white screens. Ever. Rangers work in the dark.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LORE SECTION ═══ -->
+  <div class="lore">
+    <div class="section-label" style="margin-bottom:1.5rem;">The Name</div>
+    <div class="lore-text">
+      <p style="margin-bottom:1.2rem;">
+        The <em>Dúnedain</em> were the Rangers of the North — the last remnant of a great kingdom, 
+        scattered and outnumbered, holding the line through sheer stubbornness and duty. 
+        They patrolled the wild lands of Eriador for centuries, keeping the Shire and Bree safe 
+        from threats those people never even knew existed.
+      </p>
+      <p style="margin-bottom:1.2rem;">
+        No one cheered for them. No one knew their names. Barliman Butterbur thought they were 
+        vagabonds. But Aragorn, heir of Isildur, was among them — 87 years old and still in his prime, 
+        carrying the blood of Númenor and the discipline of a lifetime of training in the wild.
+      </p>
+      <p>
+        This app is named for that ethos. <em>Show up. Do the work. Hold the line.</em> 
+        The wild lands don't patrol themselves — and neither does your fitness.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ STATS SHOWCASE ═══ -->
+  <section>
+    <div class="split reverse">
+      <div class="split-text">
+        <div class="section-label">Know Thyself</div>
+        <h2 class="section-title">Every Metric, Every Session</h2>
+        <p class="section-desc">
+          Track strain across every sport you do — weightlifting, running, swimming, surfing, 
+          cycling, and more. Daily, weekly, and monthly views show exactly where your effort goes.
+        </p>
+        <p style="color:#888; font-size:0.95rem;">
+          Endurance trends track your pace over time. Strength stats show your loading progression. 
+          The activity tab breaks down calories and strain by sport so you can see the full picture 
+          of what your body is doing across every discipline.
+        </p>
+      </div>
+      <div class="split-image">
+        <img src="images/stats.jpg" alt="Stats view showing strain by sport and calorie charts">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINAL CTA ═══ -->
+  <div class="cta-section">
+    <div class="section-label" style="margin-bottom:1rem;">Join the Rangers</div>
+    <h2>Ready to Hold the Line?</h2>
+    <p>
+      Dúnedain is available now on iOS via TestFlight. 
+      Free. No ads. No subscriptions. Just the program.
+    </p>
+    <a href="#" class="hero-cta">Get Early Access</a>
+    <p class="hero-badge" style="margin-top:1rem;">iOS · TestFlight · Free</p>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="site-footer">
+    <p>&copy; 2026 Dúnedain. All rights reserved.</p>
+    <p style="margin-top:0.5rem;">
+      <a href="index.html">Support & User Guide</a>
+      <a href="https://ywuqqzaosauxwgajjpgg.supabase.co/functions/v1/privacy-policy">Privacy Policy</a>
+    </p>
+  </div>
+
+</body>
+</html>
